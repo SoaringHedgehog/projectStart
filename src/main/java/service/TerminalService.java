@@ -1,48 +1,53 @@
 package service;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class TerminalService {
-    public static final String HELP = "HELP";
-    public static final String CREATE = "CREATE";
-    public static final String READ = "READ";
-    public static final String UPDATE = "UPDATE";
-    public static final String DELETE = "DELETE";
-    public static final String EXIT = "EXIT";
+    private static final String HELP = "HELP";
+    private static final String CREATE = "CREATE";
+    private static final String READ = "READ";
+    private static final String UPDATE = "UPDATE";
+    private static final String DELETE = "DELETE";
+    private static final String EXIT = "EXIT";
 
-    Scanner sc = new Scanner(System.in);
+    private final ProjectService projectService;
+    private final TaskService taskService;
 
-    ProjectService ps;
-    TaskService ts;
+    //TODO Map<Команда, класс команды> commandMap
+    // +экземплярКласса get(commandName)
+    // зарегистрировать команду = вставить в мапу
 
-    public TerminalService(){
-        this.ps = new ProjectService();
-        this.ts = new TaskService();
+    Scanner scanner = new Scanner(System.in);
+
+    public TerminalService(ProjectService projectService, TaskService taskService){
+        this.taskService = taskService;
+        this.projectService = projectService;
     }
 
     public void start(){
         boolean running = true;
         while(running){
-            String command = sc.next();
+            String command = scanner.next();
             String entity;
             switch(command){
                 case HELP:
                     help();
                     break;
                 case CREATE:
-                    entity = sc.next();
+                    entity = scanner.next();
                     create(entity);
                     break;
                 case READ:
-                    entity = sc.next();
+                    entity = scanner.next();
                     read(entity);
                     break;
                 case UPDATE:
-                    entity = sc.next();
+                    entity = scanner.next();
                     update(entity);
                     break;
                 case DELETE:
-                    entity = sc.next();
+                    entity = scanner.next();
                     delete(entity);
                     break;
                 case EXIT:
@@ -57,7 +62,7 @@ public class TerminalService {
     public void help(){
         System.out.println(CREATE + " Сущность");
         System.out.println(READ + " Сущность");
-        System.out.println(UPDATE + " Сущность");
+        System.out.println(UPDATE + " Сущность Название_Поля Значение");
         System.out.println(DELETE + " Сущность");
         System.out.println(EXIT);
         System.out.println();
@@ -67,14 +72,14 @@ public class TerminalService {
         if(entity.equalsIgnoreCase("Project")){
             System.out.println("Выбрано создание проекта");
             System.out.println("Введите через пробел имя, описание, дату начала и дату окончания проекта");
-            String project = sc.nextLine();
-            ps.create(project);
+            String project = scanner.nextLine();
+            projectService.create(project);
         }
         else if(entity.equalsIgnoreCase("Task")){
             System.out.println("Выбрано создание задачи");
             System.out.println("Введите через пробел имя, описание, дату начала и дату окончания проекта");
-            String task = sc.nextLine();
-            ts.create(task);
+            String task = scanner.nextLine();
+            taskService.create(task);
         }
         else{
             System.out.println("Такой сущности не существует");
@@ -85,14 +90,14 @@ public class TerminalService {
         if(entity.equalsIgnoreCase("Project")){
             System.out.println("Выбрано чтение проекта");
             System.out.println("Введите имя проекта");
-            String projectName = sc.nextLine();
-            ps.read(projectName);
+            String projectName = scanner.nextLine();
+            projectService.readByName(projectName);
         }
         else if(entity.equalsIgnoreCase("Task")){
             System.out.println("Выбрано чтение задачи");
             System.out.println("Введите имя задачи");
-            String taskName = sc.nextLine();
-            ts.read(taskName);
+            String taskName = scanner.nextLine();
+            taskService.read(taskName);
         }
         else{
             System.out.println("Такой сущности не существует");
@@ -103,14 +108,14 @@ public class TerminalService {
         if(entity.equalsIgnoreCase("Project")){
             System.out.println("Выбрано обновление проекта");
             System.out.println("Введите имя проекта");
-            String projectName = sc.nextLine();
-            ps.update(projectName);
+            String projectName = scanner.nextLine();
+            projectService.updateByName(projectName);
         }
         else if(entity.equalsIgnoreCase("Task")){
             System.out.println("Выбрано обновление задачи");
             System.out.println("Введите имя задачи");
-            String taskName = sc.nextLine();
-            ts.update(taskName);
+            String taskName = scanner.nextLine();
+            taskService.update(taskName);
         }
         else{
             System.out.println("Такой сущности не существует");
@@ -121,14 +126,14 @@ public class TerminalService {
         if(entity.equalsIgnoreCase("Project")){
             System.out.println("Выбрано удаление проекта");
             System.out.println("Введите имя проекта");
-            String projectName = sc.nextLine();
-            ps.delete(projectName);
+            String projectName = scanner.nextLine();
+            projectService.deleteByName(projectName);
         }
         else if(entity.equalsIgnoreCase("Task")){
             System.out.println("Выбрано удаление задачи");
             System.out.println("Введите имя задачи");
-            String taskName = sc.nextLine();
-            ts.delete(taskName);
+            String taskName = scanner.nextLine();
+            taskService.delete(taskName);
         }
         else{
             System.out.println("Такой сущности не существует");

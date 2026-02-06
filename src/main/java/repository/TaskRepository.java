@@ -15,6 +15,7 @@ public class TaskRepository {
 
     public void create(int id, String name, String description, LocalDate dateStart, LocalDate dateFinish){
         Task task = new Task(id, name, description, dateStart, dateFinish);
+        map.put(task.getName(), task);
     }
 
     public Task read(String taskName){

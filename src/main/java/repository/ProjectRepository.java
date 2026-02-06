@@ -10,11 +10,9 @@ import java.util.Map;
 public class ProjectRepository {
     //<name, project>
     private HashMap<String, Project> map;
-    TaskRepository tr;
 
     public ProjectRepository(){
         this.map = new HashMap<>();
-        this.tr = new TaskRepository();
     }
 
     //CREATE
@@ -27,11 +25,13 @@ public class ProjectRepository {
     public Project read(String projectName){
         return map.get(projectName);
     }
-
-    public void findAll(Project project){
-
+    public Project findByName(String projectName){
+        return map.get(projectName);
     }
+    //TODO findById
+    public void findById(String projectName){}
 
+    public void findAll(Project project){}
     public void findOne(){}
 
     //UPDATE
@@ -41,9 +41,6 @@ public class ProjectRepository {
 
     //DELETE
     public void delete(String projectName){
-        for(Task task : map.get(projectName).getTasks()){
-            tr.delete(task.getName());
-        }
         map.remove(projectName);
     }
 

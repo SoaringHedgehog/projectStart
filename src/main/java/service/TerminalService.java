@@ -10,6 +10,8 @@ public class TerminalService {
     public static final String DELETE = "DELETE";
     public static final String EXIT = "EXIT";
 
+    Scanner sc = new Scanner(System.in);
+
     ProjectService ps;
     TaskService ts;
 
@@ -19,25 +21,29 @@ public class TerminalService {
     }
 
     public void start(){
-        Scanner sc = new Scanner(System.in);
         boolean running = true;
         while(running){
-            String command = sc.nextLine();
+            String command = sc.next();
+            String entity;
             switch(command){
                 case HELP:
                     help();
                     break;
                 case CREATE:
-                    create();
+                    entity = sc.next();
+                    create(entity);
                     break;
                 case READ:
-                    read();
+                    entity = sc.next();
+                    read(entity);
                     break;
                 case UPDATE:
-                    update();
+                    entity = sc.next();
+                    update(entity);
                     break;
                 case DELETE:
-                    delete();
+                    entity = sc.next();
+                    delete(entity);
                     break;
                 case EXIT:
                     running = false;
@@ -57,19 +63,75 @@ public class TerminalService {
         System.out.println();
     }
 
-    public void create(){
-        ps.create();
+    public void create(String entity){
+        if(entity.equalsIgnoreCase("Project")){
+            System.out.println("Выбрано создание проекта");
+            System.out.println("Введите через пробел имя, описание, дату начала и дату окончания проекта");
+            String project = sc.nextLine();
+            ps.create(project);
+        }
+        else if(entity.equalsIgnoreCase("Task")){
+            System.out.println("Выбрано создание задачи");
+            System.out.println("Введите через пробел имя, описание, дату начала и дату окончания проекта");
+            String task = sc.nextLine();
+            ts.create(task);
+        }
+        else{
+            System.out.println("Такой сущности не существует");
+        }
     }
 
-    public void read(){
-        ps.read();
+    public void read(String entity){
+        if(entity.equalsIgnoreCase("Project")){
+            System.out.println("Выбрано чтение проекта");
+            System.out.println("Введите имя проекта");
+            String projectName = sc.nextLine();
+            ps.read(projectName);
+        }
+        else if(entity.equalsIgnoreCase("Task")){
+            System.out.println("Выбрано чтение задачи");
+            System.out.println("Введите имя задачи");
+            String taskName = sc.nextLine();
+            ts.read(taskName);
+        }
+        else{
+            System.out.println("Такой сущности не существует");
+        }
     }
 
-    public void update(){
-        ps.update();
+    public void update(String entity){
+        if(entity.equalsIgnoreCase("Project")){
+            System.out.println("Выбрано обновление проекта");
+            System.out.println("Введите имя проекта");
+            String projectName = sc.nextLine();
+            ps.update(projectName);
+        }
+        else if(entity.equalsIgnoreCase("Task")){
+            System.out.println("Выбрано обновление задачи");
+            System.out.println("Введите имя задачи");
+            String taskName = sc.nextLine();
+            ts.update(taskName);
+        }
+        else{
+            System.out.println("Такой сущности не существует");
+        }
     }
 
-    public void delete(){
-        ps.delete();
+    public void delete(String entity){
+        if(entity.equalsIgnoreCase("Project")){
+            System.out.println("Выбрано удаление проекта");
+            System.out.println("Введите имя проекта");
+            String projectName = sc.nextLine();
+            ps.delete(projectName);
+        }
+        else if(entity.equalsIgnoreCase("Task")){
+            System.out.println("Выбрано удаление задачи");
+            System.out.println("Введите имя задачи");
+            String taskName = sc.nextLine();
+            ts.delete(taskName);
+        }
+        else{
+            System.out.println("Такой сущности не существует");
+        }
     }
 }

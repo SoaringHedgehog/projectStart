@@ -3,6 +3,7 @@ package repository;
 import entity.Project;
 import entity.Task;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +18,8 @@ public class ProjectRepository {
     }
 
     //CREATE
-    public void create(){
-        Project project = new Project();
+    public void create(int id, String name, String description, LocalDate dateStart, LocalDate dateFinish){
+        Project project = new Project(id, name, description, dateStart, dateFinish);
         map.put(project.getName(), project);
     }
 
@@ -27,7 +28,10 @@ public class ProjectRepository {
         return map.get(projectName);
     }
 
-    public void findAll(){}
+    public void findAll(Project project){
+
+    }
+
     public void findOne(){}
 
     //UPDATE

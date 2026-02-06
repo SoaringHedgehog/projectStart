@@ -1,22 +1,26 @@
 package entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Getter @Setter
-@NoArgsConstructor
 public class Task {
-    private int id;
+    private int id; //Потом замена на UUID
     private String name;
     private String description;
     private LocalDate dateStart;
     private LocalDate dateFinish;
     private Project project;
+
+    public Task(int id, String name, String description, LocalDate dateStart, LocalDate dateFinish){
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.dateStart = dateStart;
+        this.dateFinish = dateFinish;
+    }
 
     public String toString(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");

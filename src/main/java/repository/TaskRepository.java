@@ -3,6 +3,7 @@ package repository;
 import entity.Project;
 import entity.Task;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class TaskRepository {
@@ -12,9 +13,8 @@ public class TaskRepository {
         this.map = new HashMap<>();
     }
 
-    public void create(){
-        Task task = new Task();
-        map.put(task.getName(), task);
+    public void create(int id, String name, String description, LocalDate dateStart, LocalDate dateFinish){
+        Task task = new Task(id, name, description, dateStart, dateFinish);
     }
 
     public Task read(String taskName){

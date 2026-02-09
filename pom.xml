@@ -29,6 +29,18 @@
       <version>1.18.42</version> <!-- Актуальную версию можно проверить на Maven Central -->
       <scope>provided</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>5.2.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>5.2.5</version>
+    </dependency>
   </dependencies>
 
   <build>

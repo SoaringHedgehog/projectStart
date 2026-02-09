@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class CreateTaskCommand implements Command{
     private final Scanner scanner;
     private final TaskService taskService;
+    String pattern = "create task";
 
     public CreateTaskCommand(Scanner scanner, TaskService taskService){
         this.scanner = scanner;
@@ -23,7 +24,7 @@ public class CreateTaskCommand implements Command{
 
     @Override
     public String description() {
-        String description = "Команда создаёт сущность Задача";
+        String description = pattern + " - Команда создаёт сущность Задача";
         return description;
     }
 }

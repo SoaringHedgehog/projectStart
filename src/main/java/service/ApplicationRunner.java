@@ -8,22 +8,22 @@ public class ApplicationRunner {
     private final ProjectService projectService;
     private final TaskService taskService;
     private final TerminalService terminalService;
-    private FileService fileService;
+    private FileServiceImpl fileService;
     private HashMap<String, Command> commandMap;
 
     public ApplicationRunner(){
+        commandMap = new HashMap<>();
+
         taskService = new TaskService();
         projectService = new ProjectService(taskService);
-        commandMap = new HashMap<>();
+
+        fileService = new FileServiceImpl(projectService, taskService);
         terminalService = new TerminalService(projectService, taskService, commandMap);
-        // TODO Заполнить map всеми командами
     }
 
     public void run(){
         //TODO  Заполнение сущностей из файлов(xls). Apache POI.
-        // +FileService
-        // fileService.initialize();
-        fileService.initialize();
+        //fileService.initialize();
         terminalService.start();
     }
 }

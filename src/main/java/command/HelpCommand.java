@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class HelpCommand implements Command{
     HashMap<String, Command> commandMap;
+    String pattern = "help";
+
     public HelpCommand(HashMap<String, Command> commandMap){
         this.commandMap = commandMap;
     }
@@ -18,7 +20,7 @@ public class HelpCommand implements Command{
 
     @Override
     public String description() {
-        String description = "Команда показывает набор всех команд";
+        String description = pattern + " - Команда показывает набор всех команд";
         return description;
     }
 }

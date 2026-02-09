@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class FindByNameProjectCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;
+    String pattern = "findbyname project";
 
     public FindByNameProjectCommand(Scanner scanner, ProjectService projectService){
         this.scanner = scanner;
@@ -24,7 +25,7 @@ public class FindByNameProjectCommand implements Command{
 
     @Override
     public String description() {
-        String description = "Команда ищет сущность Проект по Имени";
+        String description = pattern +" - Команда ищет сущность Проект по Имени";
         return description;
     }
 }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class UpdateByIdProjectCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;
+    String pattern = "updatebyid project";
 
     public UpdateByIdProjectCommand(Scanner scanner, ProjectService projectService){
         this.scanner = scanner;
@@ -16,14 +17,16 @@ public class UpdateByIdProjectCommand implements Command{
     @Override
     public void process() {
         System.out.println("Выбрано обновление проекта по id");
-        System.out.println("Введите id проекта");
+        System.out.println("Введите id проекта, поле для изменения и новое значение");
         int projectId = Integer.parseInt(scanner.nextLine());
+        String field = scanner.next();
+        String newValue = scanner.next(); // TODO правильный формат?
         projectService.updateById(projectId);
     }
 
     @Override
     public String description() {
-        String description = "Команда обновляет(изменяет) сущность Проект по ID";
+        String description = pattern + " - Команда обновляет(изменяет) сущность Проект по ID";
         return description;
     }
 }

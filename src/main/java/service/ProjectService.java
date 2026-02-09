@@ -49,7 +49,7 @@ public class ProjectService {
     public void deleteByName(String projectName){
         Project project = projectRepository.findByName(projectName);
         for(Task task : project.getTasks()){
-            taskService.delete(task.getName());
+            taskService.deleteByName(task.getName());
         }
         projectRepository.delete(projectName);
     }

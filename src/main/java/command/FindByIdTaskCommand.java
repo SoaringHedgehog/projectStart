@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class FindByIdTaskCommand implements Command{
     private final Scanner scanner;
     private final TaskService taskService;
+    String pattern = "findbyid task";
 
     public FindByIdTaskCommand(Scanner scanner, TaskService taskService){
         this.scanner = scanner;
@@ -24,7 +25,7 @@ public class FindByIdTaskCommand implements Command{
 
     @Override
     public String description() {
-        String description = "Команда ищет сущность Задача по ID";
+        String description = pattern + " - Команда ищет сущность Задача по ID";
         return description;
     }
 }

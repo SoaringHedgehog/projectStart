@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class CreateProjectCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;
+    String pattern = "create project";
 
     public CreateProjectCommand(Scanner scanner, ProjectService projectService){
         this.scanner = scanner;
@@ -23,7 +24,7 @@ public class CreateProjectCommand implements Command{
 
     @Override
     public String description() {
-        String description = "Команда создаёт сущность Проект";
+        String description = pattern + " - Команда создаёт сущность Проект";
         return description;
     }
 }

@@ -36,7 +36,7 @@ public class TaskService {
     }
 
     //DELETE
-    public void delete(String taskName){
+    public void deleteByName(String taskName){
         taskRepository.deleteByName(taskName);
     }
 }

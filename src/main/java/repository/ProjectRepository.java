@@ -9,43 +9,48 @@ import java.util.Map;
 
 public class ProjectRepository {
     //<name, project>
-    private HashMap<String, Project> map;
+    private HashMap<String, Project> projectsMap;
 
     public ProjectRepository(){
-        this.map = new HashMap<>();
+        this.projectsMap = new HashMap<>();
     }
 
     //CREATE
     public void create(int id, String name, String description, LocalDate dateStart, LocalDate dateFinish){
         Project project = new Project(id, name, description, dateStart, dateFinish);
-        map.put(project.getName(), project);
+        projectsMap.put(project.getName(), project);
     }
 
     //READ
-    public Project read(String projectName){
-        return map.get(projectName);
-    }
     public Project findByName(String projectName){
-        return map.get(projectName);
+        return projectsMap.get(projectName);
     }
-    //TODO findById
-    public void findById(String projectName){}
-
-    public void findAll(Project project){}
-    public void findOne(){}
+    public Project findById(int projectId){
+        for(Map.Entry<String, Project> project : projectsMap.entrySet()){
+            if(project.getValue().getId() == projectId){
+                return projectsMap.get(project.getKey());
+            }
+        }
+        return new Project();
+    }
 
     //UPDATE
-    public void update(String projectName){
-        map.get(projectName);
+    public Project updateByName(String projectName){
+        return projectsMap.get(projectName);
     }
+    public Project updateById(int projectId){
+        for(Map.Entry<String, Project> project : projectsMap.entrySet()){
+            if(project.getValue().getId() == projectId){
+                return projectsMap.get(project.getKey());
+            }
+        }
+        return new Project();
+    }// TODO исправить
 
     //DELETE
     public void delete(String projectName){
-        map.remove(projectName);
+        projectsMap.remove(projectName);
     }
-
-    public void remove(){}
-    public void removeAll(){}
 
     public void printTasks(Project project){
         for(Task task : project.getTasks()){
@@ -54,7 +59,7 @@ public class ProjectRepository {
     }
 
     public void printAllProjects(){
-        for(Map.Entry<String, Project> entry : map.entrySet()){
+        for(Map.Entry<String, Project> entry : projectsMap.entrySet()){
             String key = entry.getKey();
             Project project = entry.getValue();
             System.out.println("Ключ: " + key + "\nЗначение: " + project);

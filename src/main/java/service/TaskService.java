@@ -1,5 +1,6 @@
 package service;
 
+import entity.Task;
 import repository.TaskRepository;
 
 import java.time.LocalDate;
@@ -11,21 +12,31 @@ public class TaskService {
         this.taskRepository = new TaskRepository();
     }
 
+    //CREATE
     public void create(String task){
         int id = 0;
         String[] taskArr = task.split(" ");
         taskRepository.create(id, taskArr[0], taskArr[1], LocalDate.parse(taskArr[2]), LocalDate.parse(taskArr[3]));
     }
 
-    public void read(String taskName){
-        taskRepository.read(taskName);
+    //READ
+    public Task findByName(String taskName){
+        return taskRepository.findByName(taskName);
+    }
+    public Task findById(int taskId){
+        return taskRepository.findById(taskId);
     }
 
-    public void update(String taskName){
-        taskRepository.update(taskName);
+    //UPDATE
+    public void updateByName(String taskName){
+        taskRepository.updateByName(taskName);
+    }
+    public void updateById(int taskId){
+        taskRepository.updateById(taskId);
     }
 
+    //DELETE
     public void delete(String taskName){
-        taskRepository.delete(taskName);
+        taskRepository.deleteByName(taskName);
     }
 }

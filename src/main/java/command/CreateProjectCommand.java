@@ -23,6 +23,7 @@ public class CreateProjectCommand implements Command{
 
     @Override
     public String description() {
-        return "";
+        String description = "Команда создаёт сущность Проект";
+        return description;
     }
 }

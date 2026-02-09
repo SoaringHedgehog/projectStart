@@ -1,8 +1,6 @@
 package entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Getter @Setter
+@NoArgsConstructor
 public class Project {
     private int id; //Потом замена типа на UUID
     private String name;

@@ -1,5 +1,7 @@
 package service;
 
+import command.*;
+
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -11,24 +13,41 @@ public class TerminalService {
     private static final String DELETE = "DELETE";
     private static final String EXIT = "EXIT";
 
+    Scanner scanner = new Scanner(System.in);
     private final ProjectService projectService;
     private final TaskService taskService;
+    HashMap<String, Command> commandMap;
 
     //TODO Map<Команда, класс команды> commandMap
     // +экземплярКласса get(commandName)
     // зарегистрировать команду = вставить в мапу
 
-    Scanner scanner = new Scanner(System.in);
-
-    public TerminalService(ProjectService projectService, TaskService taskService){
+    public TerminalService(ProjectService projectService, TaskService taskService, HashMap<String, Command> map){
         this.taskService = taskService;
         this.projectService = projectService;
+        this.commandMap = map;
+
+        commandMap.put("CREATE Project", new CreateProjectCommand(scanner, projectService));
+        commandMap.put("CREATE Task", new CreateTaskCommand(scanner, taskService));
+        commandMap.put("FINDBYNAME Project", new FindByNameProjectCommand(scanner, projectService));
+        commandMap.put("FINDBYNAME Task", new FindByNameTaskCommand(scanner, taskService));
+        commandMap.put("FINDBYID Project", new FindByIdProjectCommand(scanner, projectService));
+        commandMap.put("FINDBYID Task", new FindByIdTaskCommand(scanner, taskService));
+        commandMap.put("UPDATEBYNAME Project", new UpdateByNameProjectCommand(scanner, projectService));
+        commandMap.put("UPDATEBYNAME Task", new UpdateByNameTaskCommand(scanner, taskService));
+        commandMap.put("UPDATEBYID Project", new UpdateByIdProjectCommand(scanner, projectService));
+        commandMap.put("UPDATEBYID Task", new UpdateByIdTaskCommand(scanner, taskService));
+        commandMap.put("DELETE Project", new DeleteProjectCommand(scanner, projectService));
+        commandMap.put("DELETE Task", new DeleteTaskCommand(scanner, taskService));
+        commandMap.put("HELP", new HelpCommand(commandMap));
     }
 
     public void start(){
         boolean running = true;
         while(running){
             String command = scanner.next();
+            commandMap.get(command);
+            // TODO Обработка команд?
             String entity;
             switch(command){
                 case HELP:
@@ -91,13 +110,13 @@ public class TerminalService {
             System.out.println("Выбрано чтение проекта");
             System.out.println("Введите имя проекта");
             String projectName = scanner.nextLine();
-            projectService.readByName(projectName);
+            projectService.findByName(projectName);
         }
         else if(entity.equalsIgnoreCase("Task")){
             System.out.println("Выбрано чтение задачи");
             System.out.println("Введите имя задачи");
             String taskName = scanner.nextLine();
-            taskService.read(taskName);
+            taskService.findByName(taskName);
         }
         else{
             System.out.println("Такой сущности не существует");
@@ -115,7 +134,7 @@ public class TerminalService {
             System.out.println("Выбрано обновление задачи");
             System.out.println("Введите имя задачи");
             String taskName = scanner.nextLine();
-            taskService.update(taskName);
+            taskService.updateByName(taskName);
         }
         else{
             System.out.println("Такой сущности не существует");

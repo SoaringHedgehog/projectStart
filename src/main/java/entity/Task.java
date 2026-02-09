@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Getter @Setter
+@NoArgsConstructor
 public class Task {
     private int id; //Потом замена на UUID
     private String name;

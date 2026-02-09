@@ -24,17 +24,30 @@ public class ProjectService {
         //+генерация id
     }
 
-    public Project readByName(String projectName){
-        return projectRepository.read(projectName);
+
+    //READ
+    public Project findByName(String projectName){
+        return projectRepository.findByName(projectName);
+    }
+    //TODO findById
+    public Project findById(int projectName){
+        return projectRepository.findById(projectName);
     }
 
+    //UPDATE
     public void updateByName(String projectName){
         //Поле + новое значение
-        projectRepository.update(projectName);
+        projectRepository.updateByName(projectName);
     }
 
+    public void updateById(int projectId){
+        //Поле + новое значение
+        projectRepository.updateById(projectId);
+    }
+
+    //DELETE
     public void deleteByName(String projectName){
-        Project project = projectRepository.read(projectName);
+        Project project = projectRepository.findByName(projectName);
         for(Task task : project.getTasks()){
             taskService.delete(task.getName());
         }

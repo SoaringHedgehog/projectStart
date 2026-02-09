@@ -1,6 +1,7 @@
 package service;
 
 import command.*;
+import command.CommandRegistry;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -16,7 +17,7 @@ public class TerminalService {
     Scanner scanner = new Scanner(System.in);
     private final ProjectService projectService;
     private final TaskService taskService;
-    HashMap<String, Command> commandMap;
+    CommandRegistry commandRegistry;
 
     //TODO Map<Команда, класс команды> commandMap
     // +экземплярКласса get(commandName)
@@ -25,21 +26,7 @@ public class TerminalService {
     public TerminalService(ProjectService projectService, TaskService taskService, HashMap<String, Command> map){
         this.taskService = taskService;
         this.projectService = projectService;
-        this.commandMap = map;
-
-        commandMap.put("create project", new CreateProjectCommand(scanner, projectService));
-        commandMap.put("create task", new CreateTaskCommand(scanner, taskService));
-        commandMap.put("findbyname project", new FindByNameProjectCommand(scanner, projectService));
-        commandMap.put("findbyname task", new FindByNameTaskCommand(scanner, taskService));
-        commandMap.put("findbyid project", new FindByIdProjectCommand(scanner, projectService));
-        commandMap.put("findbyid task", new FindByIdTaskCommand(scanner, taskService));
-        commandMap.put("updatebyname project", new UpdateByNameProjectCommand(scanner, projectService));
-        commandMap.put("updatebyname task", new UpdateByNameTaskCommand(scanner, taskService));
-        commandMap.put("updatebyid project", new UpdateByIdProjectCommand(scanner, projectService));
-        commandMap.put("updatebyid task", new UpdateByIdTaskCommand(scanner, taskService));
-        commandMap.put("deleteByName project", new DeleteProjectCommand(scanner, projectService));
-        commandMap.put("deleteByName task", new DeleteTaskCommand(scanner, taskService));
-        commandMap.put("help", new HelpCommand(commandMap));
+        this.commandRegistry = new CommandRegistry(scanner, projectService, taskService);
     }
 
     public void start(){
@@ -49,12 +36,11 @@ public class TerminalService {
             String command = scanner.nextLine().toLowerCase();
             if(command.equals("exit")) break;
             try{
-                commandMap.get(command).process();
+                commandRegistry.getByName(command).process();
             }
             catch (Exception e){
                 System.out.println("Такой команды не существует. Вызовите команду 'help' для просмотра " +
                         "команд и их описания");
-                System.out.println(e);
             }
         }
     }

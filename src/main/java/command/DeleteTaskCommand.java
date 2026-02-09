@@ -27,4 +27,9 @@ public class DeleteTaskCommand implements Command{
         String description = pattern +" - Команда удаляет сущность Задача по Имени";
         return description;
     }
+
+    @Override
+    public String getName() {
+        return pattern;
+    }
 }

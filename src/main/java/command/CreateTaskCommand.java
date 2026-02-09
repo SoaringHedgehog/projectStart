@@ -27,4 +27,9 @@ public class CreateTaskCommand implements Command{
         String description = pattern + " - Команда создаёт сущность Задача";
         return description;
     }
+
+    @Override
+    public String getName() {
+        return pattern;
+    }
 }

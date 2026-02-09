@@ -28,4 +28,9 @@ public class UpdateByIdTaskCommand implements Command{
         String description = pattern + " - Команда обновляет(изменяет) сущность Задача по ID";
         return description;
     }
+
+    @Override
+    public String getName() {
+        return pattern;
+    }
 }

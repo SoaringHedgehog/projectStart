@@ -23,4 +23,9 @@ public class HelpCommand implements Command{
         String description = pattern + " - Команда показывает набор всех команд";
         return description;
     }
+
+    @Override
+    public String getName() {
+        return pattern;
+    }
 }

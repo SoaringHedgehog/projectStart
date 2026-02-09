@@ -29,4 +29,9 @@ public class UpdateByIdProjectCommand implements Command{
         String description = pattern + " - Команда обновляет(изменяет) сущность Проект по ID";
         return description;
     }
+
+    @Override
+    public String getName() {
+        return pattern;
+    }
 }

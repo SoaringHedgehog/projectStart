@@ -28,4 +28,9 @@ public class UpdateByNameTaskCommand implements Command{
         String description = pattern + " - Команда обновляет(изменяет) сущность Проект по Имени";
         return description;
     }
+
+    @Override
+    public String getName() {
+        return pattern;
+    }
 }

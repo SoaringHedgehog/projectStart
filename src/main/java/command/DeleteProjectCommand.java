@@ -27,4 +27,9 @@ public class DeleteProjectCommand implements Command{
         String description = pattern + " - Команда удаляет сущность Проект по Имени";
         return description;
     }
+
+    @Override
+    public String getName() {
+        return pattern;
+    }
 }

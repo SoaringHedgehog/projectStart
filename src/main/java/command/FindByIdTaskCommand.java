@@ -28,4 +28,9 @@ public class FindByIdTaskCommand implements Command{
         String description = pattern + " - Команда ищет сущность Задача по ID";
         return description;
     }
+
+    @Override
+    public String getName() {
+        return pattern;
+    }
 }

@@ -28,4 +28,9 @@ public class FindByNameProjectCommand implements Command{
         String description = pattern +" - Команда ищет сущность Проект по Имени";
         return description;
     }
+
+    @Override
+    public String getName() {
+        return pattern;
+    }
 }

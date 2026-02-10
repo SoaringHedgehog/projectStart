@@ -4,12 +4,12 @@ import service.ProjectService;
 
 import java.util.Scanner;
 
-public class UpdateByIdProjectCommand implements Command{
+public class ProjectUpdateByIdCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;
     String pattern = "updatebyid project";
 
-    public UpdateByIdProjectCommand(Scanner scanner, ProjectService projectService){
+    public ProjectUpdateByIdCommand(Scanner scanner, ProjectService projectService){
         this.scanner = scanner;
         this.projectService = projectService;
     }

@@ -4,12 +4,12 @@ import service.ProjectService;
 
 import java.util.Scanner;
 
-public class DeleteProjectCommand implements Command{
+public class ProjectDeleteCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;
     String pattern = "deleteByName project";
 
-    public DeleteProjectCommand(Scanner scanner, ProjectService projectService){
+    public ProjectDeleteCommand(Scanner scanner, ProjectService projectService){
         this.scanner = scanner;
         this.projectService = projectService;
     }

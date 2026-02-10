@@ -52,6 +52,10 @@ public class ProjectRepository {
         projectsMap.remove(projectName);
     }
 
+    public int getSize(){
+        return projectsMap.size();
+    }
+
     public void printTasks(Project project){
         for(Task task : project.getTasks()){
             System.out.println(task.toString());

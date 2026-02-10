@@ -4,12 +4,12 @@ import service.TaskService;
 
 import java.util.Scanner;
 
-public class CreateTaskCommand implements Command{
+public class TaskCreateCommand implements Command{
     private final Scanner scanner;
     private final TaskService taskService;
     String pattern = "create task";
 
-    public CreateTaskCommand(Scanner scanner, TaskService taskService){
+    public TaskCreateCommand(Scanner scanner, TaskService taskService){
         this.scanner = scanner;
         this.taskService = taskService;
     }

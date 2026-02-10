@@ -46,6 +46,10 @@ public class TaskRepository {
         tasksMap.remove(taskName);
     }
 
+    public int getSize(){
+        return tasksMap.size();
+    }
+
     public void printTask(String taskName){
 
     }

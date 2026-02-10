@@ -1,16 +1,15 @@
 package command;
 
-import service.ProjectService;
 import service.TaskService;
 
 import java.util.Scanner;
 
-public class UpdateByNameTaskCommand implements Command{
+public class TaskUpdateByNameCommand implements Command{
     private final Scanner scanner;
     private final TaskService taskService;
     String pattern = "updatebyname task";
 
-    public UpdateByNameTaskCommand(Scanner scanner, TaskService taskService){
+    public TaskUpdateByNameCommand(Scanner scanner, TaskService taskService){
         this.scanner = scanner;
         this.taskService = taskService;
     }

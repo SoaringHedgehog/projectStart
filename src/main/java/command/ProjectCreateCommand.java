@@ -4,12 +4,12 @@ import service.ProjectService;
 
 import java.util.Scanner;
 
-public class CreateProjectCommand implements Command{
+public class ProjectCreateCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;
     public final static String pattern = "create project";
 
-    public CreateProjectCommand(Scanner scanner, ProjectService projectService){
+    public ProjectCreateCommand(Scanner scanner, ProjectService projectService){
         this.scanner = scanner;
         this.projectService = projectService;
     }

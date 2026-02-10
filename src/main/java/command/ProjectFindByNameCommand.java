@@ -1,16 +1,15 @@
 package command;
 
 import service.ProjectService;
-import service.TaskService;
 
 import java.util.Scanner;
 
-public class FindByNameProjectCommand implements Command{
+public class ProjectFindByNameCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;
     String pattern = "findbyname project";
 
-    public FindByNameProjectCommand(Scanner scanner, ProjectService projectService){
+    public ProjectFindByNameCommand(Scanner scanner, ProjectService projectService){
         this.scanner = scanner;
         this.projectService = projectService;
     }

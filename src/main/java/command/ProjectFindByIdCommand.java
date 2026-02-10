@@ -4,12 +4,12 @@ import service.ProjectService;
 
 import java.util.Scanner;
 
-public class FindByIdProjectCommand implements Command{
+public class ProjectFindByIdCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;
     String pattern = "findbyid project";
 
-    public FindByIdProjectCommand(Scanner scanner, ProjectService projectService){
+    public ProjectFindByIdCommand(Scanner scanner, ProjectService projectService){
         this.scanner = scanner;
         this.projectService = projectService;
     }

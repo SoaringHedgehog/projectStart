@@ -1,31 +1,30 @@
 package command;
 
-import service.ProjectService;
 import service.TaskService;
 
 import java.util.Scanner;
 
-public class FindByNameTaskCommand implements Command{
+public class TaskDeleteCommand implements Command{
     private final Scanner scanner;
     private final TaskService taskService;
-    String pattern = "findbyname task";
+    String pattern = "deleteByName task";
 
-    public FindByNameTaskCommand(Scanner scanner, TaskService taskService){
+    public TaskDeleteCommand(Scanner scanner, TaskService taskService){
         this.scanner = scanner;
         this.taskService = taskService;
     }
 
     @Override
     public void process() {
-        System.out.println("Выбран поиск задачи по имени");
+        System.out.println("Выбрано удаление задачи");
         System.out.println("Введите имя задачи");
-        String projectName = scanner.nextLine();
-        taskService.findByName(projectName);
+        String taskName = scanner.nextLine();
+        taskService.deleteByName(taskName);
     }
 
     @Override
     public String description() {
-        String description = pattern + " - Команда ищет сущность Задача по Имени";
+        String description = pattern +" - Команда удаляет сущность Задача по Имени";
         return description;
     }
 

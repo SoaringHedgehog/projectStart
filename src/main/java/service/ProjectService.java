@@ -17,7 +17,7 @@ public class ProjectService {
 
     //создание project в ProjectRepository
     public void create(String project){
-        int id = 0;
+        int id = projectRepository.getSize();
         String[] taskArr = project.split(" ");
         projectRepository.create(id, taskArr[0], taskArr[1], LocalDate.parse(taskArr[2]), LocalDate.parse(taskArr[3]));
         //Конвертировать данные
@@ -29,7 +29,6 @@ public class ProjectService {
     public Project findByName(String projectName){
         return projectRepository.findByName(projectName);
     }
-    //TODO findById
     public Project findById(int projectName){
         return projectRepository.findById(projectName);
     }

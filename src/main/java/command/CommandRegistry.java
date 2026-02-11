@@ -7,15 +7,24 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class CommandRegistry {
+    Scanner scanner;
     ProjectService projectService;
     TaskService taskService;
     HashMap<String, Command> commandMap;
 
     public CommandRegistry(Scanner scanner, ProjectService projectService, TaskService taskService){
+        this.scanner = scanner;
         this.projectService = projectService;
         this.taskService = taskService;
         commandMap = new HashMap<>();
+        init();
+    }
 
+    public Command getByName(String command){
+        return commandMap.get(command);
+    }
+
+    public void init(){
         Command command = new ProjectCreateCommand(scanner, projectService);
         commandMap.put(command.getName(), command);
         command = new TaskCreateCommand(scanner, taskService);
@@ -44,9 +53,5 @@ public class CommandRegistry {
         commandMap.put(command.getName(), command);
         command = new HelpCommand(commandMap);
         commandMap.put(command.getName(), command);
-    }
-
-    public Command getByName(String command){
-        return commandMap.get(command);
     }
 }

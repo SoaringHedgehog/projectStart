@@ -27,34 +27,45 @@ public class CommandRegistry {
     }
 
     public void init(){
-        Command command = new ProjectCreateCommand(scanner, projectService);
+        Command command = new ExitCommand();
         commandMap.put(command.getName(), command);
-        command = new TaskCreateCommand(scanner, taskService);
-        commandMap.put(command.getName(), command);
-        command = new ProjectFindByNameCommand(scanner, projectService);
-        commandMap.put(command.getName(), command);
-        command = new ProjectFindByNameCommand(scanner, projectService);
-        commandMap.put(command.getName(), command);
-        command = new TaskFindByNameCommand(scanner, taskService);
-        commandMap.put(command.getName(), command);
-        command = new ProjectFindByIdCommand(scanner, projectService);
-        commandMap.put(command.getName(), command);
-        command = new TaskFindByIdCommand(scanner, taskService);
-        commandMap.put(command.getName(), command);
-        command = new ProjectUpdateByNameCommand(scanner, projectService);
-        commandMap.put(command.getName(), command);
-        command = new TaskUpdateByNameCommand(scanner, taskService);
-        commandMap.put(command.getName(), command);
-        command = new ProjectUpdateByIdCommand(scanner, projectService);
-        commandMap.put(command.getName(), command);
-        command = new TaskUpdateByIdCommand(scanner, taskService);
+        command = new ProjectCreateCommand(scanner, projectService);
         commandMap.put(command.getName(), command);
         command = new ProjectDeleteCommand(scanner, projectService);
         commandMap.put(command.getName(), command);
-        command = new TaskDeleteCommand(scanner, taskService);
+        command = new ProjectFindByIdCommand(scanner, projectService);
+        commandMap.put(command.getName(), command);
+        command = new ProjectFindByNameCommand(scanner, projectService);
+        commandMap.put(command.getName(), command);
+        command = new ProjectUpdateByIdCommand(scanner, projectService);
+        commandMap.put(command.getName(), command);
+        command = new ProjectUpdateByNameCommand(scanner, projectService);
+        commandMap.put(command.getName(), command);
+
+        command = new TaskCreateCommand(scanner, taskService);
         commandMap.put(command.getName(), command);
         command = new TaskDeleteCommand(scanner, taskService);
         commandMap.put(command.getName(), command);
+        command = new TaskFindByIdCommand(scanner, taskService);
+        commandMap.put(command.getName(), command);
+        command = new TaskFindByNameCommand(scanner, taskService);
+        commandMap.put(command.getName(), command);
+        command = new TaskUpdateByIdCommand(scanner, taskService);
+        commandMap.put(command.getName(), command);
+        command = new TaskUpdateByNameCommand(scanner, taskService);
+        commandMap.put(command.getName(), command);
+
+        command = new UserAuthorizeCommand(scanner, userService, currentUser);
+        commandMap.put(command.getName(), command);
+        command = new UserPrintCurrentProfileInfoCommand(userService, currentUser);
+        commandMap.put(command.getName(), command);
+        command = new UserRegisterCommand(scanner, userService, currentUser);
+        commandMap.put(command.getName(), command);
+        command = new UserTerminateSessionCommand(scanner, userService, currentUser);
+        commandMap.put(command.getName(), command);
+        command = new UserUpdatePasswordCommand(scanner, userService, currentUser);
+        commandMap.put(command.getName(), command);
+
         command = new HelpCommand(commandMap);
         commandMap.put(command.getName(), command);
     }

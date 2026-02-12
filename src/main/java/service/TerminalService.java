@@ -7,7 +7,7 @@ import entity.User;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class TerminalService {
+public class TerminalService implements ServiceLocator{
     private static final String HELP = "HELP";
     private static final String CREATE = "CREATE";
     private static final String READ = "READ";
@@ -37,17 +37,18 @@ public class TerminalService {
             try{
                 Command command = commandRegistry.getByName(scanner.nextLine().toLowerCase());
 
-                if (command.getClass().isAnnotationPresent(RequiresAuth.class)) {
-                    if (currentUser == null) {
-                        throw new SecurityException("Для этой команды необходимо войти в систему.");
-                    }
+                if (command != null && command.getClass().isAnnotationPresent(RequiresAuth.class) && currentUser == null) {
+                    System.out.println("Для этой команды необходимо войти в систему.");
                 }
-
-                command.process();
+                else if(command == null) continue;
+                else{
+                    command.process();
+                }
             }
             catch (Exception e){
                 System.out.println("Такой команды не существует. Вызовите команду 'help' для просмотра " +
                         "команд и их описания");
+                System.out.println(e);
             }
         }
     }

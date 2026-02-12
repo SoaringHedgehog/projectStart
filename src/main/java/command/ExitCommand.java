@@ -9,7 +9,7 @@ public class ExitCommand implements Command{
 
     @Override
     public String description() {
-        String description = " - Команда реализовывает завершение работы приложения";
+        String description = pattern + " - Команда реализовывает завершение работы приложения";
         return description;
     }
 

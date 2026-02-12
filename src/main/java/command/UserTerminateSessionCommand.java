@@ -1,5 +1,6 @@
 package command;
 
+import entity.User;
 import service.UserService;
 
 import java.util.Scanner;
@@ -8,20 +9,19 @@ import java.util.Scanner;
 public class UserTerminateSessionCommand implements Command{
     private final Scanner scanner;
     private final UserService userService;
-    String pattern = "terminatecurrentsession";
+    User currentUser;
+    String pattern = "terminate_current_session";
 
-    public UserTerminateSessionCommand(Scanner scanner, UserService userService){
+    public UserTerminateSessionCommand(Scanner scanner, UserService userService, User currentUser){
         this.scanner = scanner;
         this.userService = userService;
+        this.currentUser = currentUser;
     }
 
     @Override
     public void process() {
-        System.out.println("Выбрано окончание сессии пользоватля");
-        System.out.println("Введите через пробел логин и пароль");
-        String login = scanner.next();
-        String password = scanner.next();
-        userService.terminateSession(login, password);
+        System.out.println("Выбрано окончание сессии текущего пользователя");
+        userService.terminateSession(currentUser);
     }
 
     @Override

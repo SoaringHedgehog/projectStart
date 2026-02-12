@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class TaskFindByIdCommand implements Command{
     private final Scanner scanner;
     private final TaskService taskService;
-    String pattern = "findbyid task";
+    String pattern = "find_by_id task";
 
     public TaskFindByIdCommand(Scanner scanner, TaskService taskService){
         this.scanner = scanner;

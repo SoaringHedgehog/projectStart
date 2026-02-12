@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class TaskUpdateByNameCommand implements Command{
     private final Scanner scanner;
     private final TaskService taskService;
-    String pattern = "updatebyname task";
+    String pattern = "update_by_name task";
 
     public TaskUpdateByNameCommand(Scanner scanner, TaskService taskService){
         this.scanner = scanner;

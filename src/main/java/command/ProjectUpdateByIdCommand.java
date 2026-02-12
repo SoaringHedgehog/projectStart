@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ProjectUpdateByIdCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;
-    String pattern = "updatebyid project";
+    String pattern = "update_by_id project";
 
     public ProjectUpdateByIdCommand(Scanner scanner, ProjectService projectService){
         this.scanner = scanner;

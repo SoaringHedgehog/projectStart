@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ProjectFindByNameCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;
-    String pattern = "findbyname project";
+    String pattern = "find_by_name project";
 
     public ProjectFindByNameCommand(Scanner scanner, ProjectService projectService){
         this.scanner = scanner;

@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ProjectDeleteCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;
-    String pattern = "deleteByName project";
+    String pattern = "delete_by_name project";
 
     public ProjectDeleteCommand(Scanner scanner, ProjectService projectService){
         this.scanner = scanner;

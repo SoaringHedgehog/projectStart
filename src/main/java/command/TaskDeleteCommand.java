@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class TaskDeleteCommand implements Command{
     private final Scanner scanner;
     private final TaskService taskService;
-    String pattern = "deleteByName task";
+    String pattern = "delete_by_name task";
 
     public TaskDeleteCommand(Scanner scanner, TaskService taskService){
         this.scanner = scanner;

@@ -4,6 +4,7 @@ import service.ProjectService;
 
 import java.util.Scanner;
 
+@RequiresAuth
 public class ProjectFindByIdCommand implements Command{
     private final Scanner scanner;
     private final ProjectService projectService;

@@ -2,6 +2,7 @@ package service;
 
 import command.*;
 import command.CommandRegistry;
+import entity.User;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -17,26 +18,32 @@ public class TerminalService {
     Scanner scanner = new Scanner(System.in);
     private final ProjectService projectService;
     private final TaskService taskService;
-    CommandRegistry commandRegistry;
+    private final UserService userService;
+    private final CommandRegistry commandRegistry;
+    private User currentUser;
 
-    //TODO Map<Команда, класс команды> commandMap
-    // +экземплярКласса get(commandName)
-    // зарегистрировать команду = вставить в мапу
-
-    public TerminalService(ProjectService projectService, TaskService taskService, HashMap<String, Command> map){
+    public TerminalService(ProjectService projectService, TaskService taskService, UserService userService, HashMap<String, Command> map){
         this.taskService = taskService;
         this.projectService = projectService;
-        this.commandRegistry = new CommandRegistry(scanner, projectService, taskService);
+        this.userService = userService;
+        this.commandRegistry = new CommandRegistry(scanner, projectService, taskService, userService, currentUser);
     }
 
+    // TODO 4.3.3
     public void start(){
         boolean running = true;
         while(running){
             System.out.println("Введите команду: ");
-            String command = scanner.nextLine().toLowerCase();
-            if(command.equals("exit")) break;
             try{
-                commandRegistry.getByName(command).process();
+                Command command = commandRegistry.getByName(scanner.nextLine().toLowerCase());
+
+                if (command.getClass().isAnnotationPresent(RequiresAuth.class)) {
+                    if (currentUser == null) {
+                        throw new SecurityException("Для этой команды необходимо войти в систему.");
+                    }
+                }
+
+                command.process();
             }
             catch (Exception e){
                 System.out.println("Такой команды не существует. Вызовите команду 'help' для просмотра " +

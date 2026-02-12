@@ -20,7 +20,7 @@ public class FileServiceImpl implements FileService{
 
     @Override
     public void initialize() {
-
+        // TODO Нужно получить доступ к map в репозиториях и здесь их заполнить - через create
         Map<String, String> taskMap = new HashMap<>();
 
         try (FileInputStream fis = new FileInputStream(filePath);

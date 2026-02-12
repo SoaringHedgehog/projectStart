@@ -14,6 +14,7 @@ public class Task {
     private LocalDate dateStart;
     private LocalDate dateFinish;
     private Project project;
+    private User userId;
 
     public Task(int id, String name, String description, LocalDate dateStart, LocalDate dateFinish){
         this.id = id;

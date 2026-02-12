@@ -9,6 +9,7 @@ import java.util.UUID;
 
 @Getter @Setter
 @NoArgsConstructor
+@ToString
 public class Project {
     private int id; //Потом замена типа на UUID
     private String name;
@@ -16,6 +17,7 @@ public class Project {
     private LocalDate dateStart;
     private LocalDate dateFinish;
     private List<Task> tasks;
+    private User userId;
 
     public Project(int id, String name, String description, LocalDate dateStart, LocalDate dateFinish){
         this.id = id;

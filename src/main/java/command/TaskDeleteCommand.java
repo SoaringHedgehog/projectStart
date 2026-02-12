@@ -4,6 +4,7 @@ import service.TaskService;
 
 import java.util.Scanner;
 
+@RequiresAuth
 public class TaskDeleteCommand implements Command{
     private final Scanner scanner;
     private final TaskService taskService;

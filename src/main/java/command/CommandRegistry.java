@@ -1,7 +1,9 @@
 package command;
 
+import entity.User;
 import service.ProjectService;
 import service.TaskService;
+import service.UserService;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -10,18 +12,18 @@ public class CommandRegistry {
     Scanner scanner;
     ProjectService projectService;
     TaskService taskService;
+    UserService userService;
+    User currentUser;
     HashMap<String, Command> commandMap;
 
-    public CommandRegistry(Scanner scanner, ProjectService projectService, TaskService taskService){
+    public CommandRegistry(Scanner scanner, ProjectService projectService, TaskService taskService, UserService userService, User currentUser){
         this.scanner = scanner;
         this.projectService = projectService;
         this.taskService = taskService;
+        this.userService = userService;
+        this.currentUser = currentUser;
         commandMap = new HashMap<>();
         init();
-    }
-
-    public Command getByName(String command){
-        return commandMap.get(command);
     }
 
     public void init(){
@@ -51,7 +53,13 @@ public class CommandRegistry {
         commandMap.put(command.getName(), command);
         command = new TaskDeleteCommand(scanner, taskService);
         commandMap.put(command.getName(), command);
+        command = new TaskDeleteCommand(scanner, taskService);
+        commandMap.put(command.getName(), command);
         command = new HelpCommand(commandMap);
         commandMap.put(command.getName(), command);
+    }
+
+    public Command getByName(String command){
+        return commandMap.get(command);
     }
 }

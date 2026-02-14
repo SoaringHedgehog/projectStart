@@ -7,8 +7,13 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class User {
-    String login;
-    String passwordHash; // TODO String?
-    RoleType roleType;
+    private int id;
+    private String login;
+    private String passwordHash; // TODO String?
+    private RoleType roleType;
 
+    @Override
+    public String toString(){
+        return "id: " + id + "\n\tЛогин: " + login + "\n\tХэш пароля: " + passwordHash + "\n\tРоль: " + roleType.displayName();
+    }
 }

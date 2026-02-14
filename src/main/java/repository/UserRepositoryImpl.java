@@ -1,6 +1,7 @@
 package repository;
 
 import entity.RoleType;
+import entity.Session;
 import entity.User;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
-    public void authorizeUser(String login, String passwordHash, User currentUser){
+    public void authorizeUser(String login, String passwordHash, Session session){
         User user = userMap.get(login);
         if(user == null){
             System.out.println("Пользователь с таким логином не найден");
@@ -23,7 +24,7 @@ public class UserRepositoryImpl implements UserRepository{
         }
 
         if(Objects.equals(user.getPasswordHash(), passwordHash)){
-            currentUser = userMap.get(login);
+            session.setCurrentUser(userMap.get(login));
             System.out.println("Пользователь авторизован");
         }
         else{
@@ -32,9 +33,9 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
-    public void registerUser(String login, String passwordHash, RoleType role){
+    public void registerUser(int userId, String login, String passwordHash, RoleType role){
         if(!userMap.containsKey(login)){
-            User user = new User(login, passwordHash, role);
+            User user = new User(userId, login, passwordHash, role);
             userMap.put(login, user);
             System.out.println("Пользователь успешно зарегистрирован");
         }
@@ -44,18 +45,23 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
-    public void terminateSession(User currentUser){
-        currentUser = null;
+    public void terminateSession(Session session){
+        session.setCurrentUser(null);
         System.out.println("Сессия закрыта");
     }
 
     @Override
     public void updatePassword(String oldPasswordHash, String newPasswordHash){
-
+        // TODO
     }
 
     @Override
-    public void printCurrentProfileInfo(User currentUser){
-        System.out.println(currentUser.toString());
+    public void printCurrentProfileInfo(Session session){
+        System.out.println(session.getCurrentUser().toString());
+    }
+
+    @Override
+    public int getRepositorySize(){
+        return userMap.size();
     }
 }

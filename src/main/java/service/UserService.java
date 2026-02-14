@@ -1,7 +1,7 @@
 package service;
 
 import entity.RoleType;
-import entity.User;
+import entity.Session;
 import repository.UserRepository;
 import repository.UserRepositoryImpl;
 
@@ -10,15 +10,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class UserService {
-    private final UserRepository userRepositoryImpl;
-    User currentUser;
+    private final UserRepository userRepository;
+    Session session;
 
     public UserService(){
-        this.userRepositoryImpl = new UserRepositoryImpl();
+        this.userRepository = new UserRepositoryImpl();
     }
 
-    public void authorizeUser(String login, String password, User currentUser) {
-        if(currentUser != null){
+    public void authorizeUser(String login, String password, Session session) {
+        if(session.getCurrentUser() != null){
             System.out.println("Вход уже выполнен");
             return;
         }
@@ -45,14 +45,18 @@ public class UserService {
                 checkedPassword.append(String.format("%02x", b & 0xff));
             }
 
-            userRepositoryImpl.authorizeUser(login, checkedPassword.toString(), currentUser);
+            userRepository.authorizeUser(login, checkedPassword.toString(), session);
         }
         catch(NoSuchAlgorithmException | UnsupportedEncodingException e) {
             throw new RuntimeException("Ошибка при генерации MD5 хеша", e);
         }
     }
 
-    public void registerUser(String login, String password, String role) {
+    public void registerUser(String id, String login, String password, RoleType role) {
+        Integer idChecked;
+        if(id == null) idChecked = userRepository.getRepositorySize();
+        else idChecked = Integer.parseInt(id);
+
         if(login == null || login.isEmpty()){
             System.out.println("Логин не может быть пустым");
             return;
@@ -63,8 +67,11 @@ public class UserService {
             return;
         }
 
-        if(role == null || role.isEmpty()){
-            System.out.println("Роль не может быть пустой");
+        try{
+            RoleType.valueOf(role.toString());
+        }
+        catch (IllegalArgumentException e){
+            System.out.println("Такой роли не существует");
             return;
         }
 
@@ -80,20 +87,18 @@ public class UserService {
                 checkedPassword.append(String.format("%02x", b & 0xff));
             }
 
-            RoleType checkedRole = RoleType.valueOf(role);
-
-            userRepositoryImpl.registerUser(login, checkedPassword.toString(), checkedRole);
+            userRepository.registerUser(idChecked, login, checkedPassword.toString(), role);
         }
         catch(NoSuchAlgorithmException | UnsupportedEncodingException e) {
             throw new RuntimeException("Ошибка при генерации MD5 хеша", e);
         }
     }
 
-    public void terminateSession(User currentUser){
-        if(currentUser == null){
+    public void terminateSession(Session session){
+        if(session.getCurrentUser() == null){
             System.out.println("Пользователь и так не в сети");
         }
-        userRepositoryImpl.terminateSession(currentUser);
+        userRepository.terminateSession(session);
     }
 
     public void updatePassword(String oldPassword, String newPassword){
@@ -130,14 +135,14 @@ public class UserService {
                 checkedNewPassword.append(String.format("%02x", b & 0xff));
             }
 
-            userRepositoryImpl.updatePassword(checkedOldPassword.toString(), checkedNewPassword.toString());
+            userRepository.updatePassword(checkedOldPassword.toString(), checkedNewPassword.toString());
         }
         catch(NoSuchAlgorithmException | UnsupportedEncodingException e) {
             throw new RuntimeException("Ошибка при генерации MD5 хеша", e);
         }
     }
 
-    public void printCurrentProfileInfo(User currentUser){
-        userRepositoryImpl.printCurrentProfileInfo(currentUser);
+    public void printCurrentProfileInfo(Session session){
+        userRepository.printCurrentProfileInfo(session);
     }
 }

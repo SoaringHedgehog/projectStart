@@ -13,8 +13,6 @@ public class Task {
     private String description;
     private LocalDate dateStart;
     private LocalDate dateFinish;
-    private Project project;
-    private User userId;
 
     public Task(int id, String name, String description, LocalDate dateStart, LocalDate dateFinish){
         this.id = id;
@@ -26,7 +24,7 @@ public class Task {
 
     public String toString(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        return "Id: " + id + ", Название: " + name + ", Описание: " + description
-                + ", Дата начала: " + dtf.format(dateStart) + ", Дата окончания: " + dtf.format(dateFinish);
+        return "Id: " + id + "\n\tНазвание: " + name + "\n\tОписание: " + description
+                + "\n\tДата начала:\t" + dtf.format(dateStart) + "\n\tДата окончания:\t" + dtf.format(dateFinish);
     }
 }

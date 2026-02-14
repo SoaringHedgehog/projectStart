@@ -1,5 +1,6 @@
 package command;
 
+import entity.Session;
 import entity.User;
 import service.UserService;
 
@@ -8,22 +9,24 @@ import java.util.Scanner;
 public class UserAuthorizeCommand implements Command{
     private final Scanner scanner;
     private final UserService userService;
-    User currentUser;
+    Session session;
+
     String pattern = "authorize user";
 
-    public UserAuthorizeCommand(Scanner scanner, UserService userService, User currentUser){
+    public UserAuthorizeCommand(Scanner scanner, UserService userService, Session session){
         this.scanner = scanner;
         this.userService = userService;
-        this.currentUser = currentUser;
+        this.session = session;
     }
 
     @Override
     public void process() {
         System.out.println("Выбрана авторизация пользователя");
-        System.out.println("Введите через пробел логин и пароль");
-        String login = scanner.next();
-        String password = scanner.next();
-        userService.authorizeUser(login, password, currentUser);
+        System.out.print("Введите логин: ");
+        String login = scanner.nextLine();
+        System.out.print("Введите пароль: ");
+        String password = scanner.nextLine();
+        userService.authorizeUser(login, password, session);
     }
 
     @Override

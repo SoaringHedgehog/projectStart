@@ -9,13 +9,11 @@ import java.util.Scanner;
 public class UserUpdatePasswordCommand implements Command{
     private final Scanner scanner;
     private final UserService userService;
-    User currentUser;
     String pattern = "update_password";
 
-    public UserUpdatePasswordCommand(Scanner scanner, UserService userService, User currentUser){
+    public UserUpdatePasswordCommand(Scanner scanner, UserService userService){
         this.scanner = scanner;
         this.userService = userService;
-        this.currentUser = currentUser;
     }
 
     @Override

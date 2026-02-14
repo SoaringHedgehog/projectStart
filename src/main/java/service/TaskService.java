@@ -7,37 +7,52 @@ import repository.TaskRepositoryImpl;
 import java.time.LocalDate;
 
 public class TaskService {
-    private final TaskRepository taskRepositoryImpl;
+    private final TaskRepository taskRepository;
 
     public TaskService(){
-        this.taskRepositoryImpl = new TaskRepositoryImpl();
+        this.taskRepository = new TaskRepositoryImpl();
     }
 
     //CREATE
-    public void create(String task){
-        int id = taskRepositoryImpl.getRepositorySize();
-        String[] taskArr = task.split(" ");
-        taskRepositoryImpl.create(id, taskArr[0], taskArr[1], LocalDate.parse(taskArr[2]), LocalDate.parse(taskArr[3]));
+    public void create(String id, String name, String description, String dateStart, String dateFinish){
+        Integer idChecked;
+        if(id == null) idChecked = taskRepository.getRepositorySize();
+        else idChecked = Integer.parseInt(id);
+
+        if(name == null || name.isEmpty()){
+            System.out.println("Имя проекта не может быть пустым");
+            return;
+        }
+        if(dateStart == null || dateStart.isEmpty()){
+            System.out.println("Дата начала не может быть пустой");
+            return;
+        }
+        if(dateFinish == null || dateFinish.isEmpty()){
+            System.out.println("Дата окончания не может быть пустой");
+            return;
+        }
+
+        taskRepository.create(idChecked, name, description, LocalDate.parse(dateStart), LocalDate.parse(dateFinish));
     }
 
     //READ
     public Task findByName(String taskName){
-        return taskRepositoryImpl.findByName(taskName);
+        return taskRepository.findByName(taskName);
     }
     public Task findById(int taskId){
-        return taskRepositoryImpl.findById(taskId);
+        return taskRepository.findById(taskId);
     }
 
     //UPDATE
     public void updateByName(String taskName){
-        taskRepositoryImpl.updateByName(taskName);
+        taskRepository.updateByName(taskName);
     }
     public void updateById(int taskId){
-        taskRepositoryImpl.updateById(taskId);
+        taskRepository.updateById(taskId);
     }
 
     //DELETE
     public void deleteByName(String taskName){
-        taskRepositoryImpl.deleteByName(taskName);
+        taskRepository.deleteByName(taskName);
     }
 }

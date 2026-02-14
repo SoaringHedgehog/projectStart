@@ -1,12 +1,14 @@
 package repository;
 
 import entity.RoleType;
+import entity.Session;
 import entity.User;
 
 public interface UserRepository {
-    void authorizeUser(String login, String passwordHash, User currentUser);
-    void registerUser(String login, String passwordHash, RoleType role);
-    void terminateSession(User currentUser);
+    void authorizeUser(String login, String passwordHash, Session session);
+    void registerUser(int userId, String login, String passwordHash, RoleType role);
+    void terminateSession(Session session);
     void updatePassword(String oldPasswordHash, String newPasswordHash);
-    void printCurrentProfileInfo(User currentUser);
+    void printCurrentProfileInfo(Session session);
+    int getRepositorySize();
 }

@@ -1,6 +1,7 @@
 package command;
 
 import entity.RoleType;
+import entity.Session;
 import entity.User;
 import service.UserService;
 
@@ -9,23 +10,37 @@ import java.util.Scanner;
 public class UserRegisterCommand implements Command{
     private final Scanner scanner;
     private final UserService userService;
-    User currentUser;
     String pattern = "register user";
 
-    public UserRegisterCommand(Scanner scanner, UserService userService, User currentUser){
+    public UserRegisterCommand(Scanner scanner, UserService userService){
         this.scanner = scanner;
         this.userService = userService;
-        this.currentUser = currentUser;
     }
 
     @Override
     public void process() {
         System.out.println("Выбрана регистрация пользователя");
-        System.out.println("Введите через пробел логин, пароль и роль. Пример: login password USER");
-        String login = scanner.next();
-        String password = scanner.next();
-        String role = scanner.next();
-        userService.registerUser(login, password, role);
+        System.out.print("Введите id, если такой есть. Если нет, просто нажмите Enter: ");
+        String id = null;
+        try{
+            id = scanner.nextLine();
+        }
+        catch(NumberFormatException e){
+            id = null;
+        }
+        finally{
+            System.out.print("Введите логин: ");
+            String login = scanner.nextLine();
+            System.out.print("Введите пароль: ");
+            String password = scanner.nextLine();
+            RoleType[] roleTypes = RoleType.values();
+            System.out.println("Введите номер роли из перечисленного: ");
+            for (int i = 0; i < roleTypes.length; i++) {
+                System.out.println(i + " " + roleTypes[i]);
+            }
+            Integer roleType = Integer.parseInt(scanner.nextLine());
+            userService.registerUser(id, login, password, roleTypes[roleType]);
+        }
     }
 
     @Override

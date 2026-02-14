@@ -18,17 +18,17 @@ public class ApplicationRunner {
     public ApplicationRunner(){
         commandMap = new HashMap<>();
 
-        taskService = new TaskService();
-        projectService = new ProjectService(taskService);
         userService = new UserService();
+        taskService = new TaskService();
+        projectService = new ProjectService(taskService, userService);
 
-        fileService = new FileServiceImpl(projectService, taskService);
+        fileService = new FileServiceImpl(projectService, taskService, userService);
         terminalService = new TerminalService(projectService, taskService, userService, commandMap);
     }
 
     public void run(){
         //TODO  Заполнение сущностей из файлов(xls). Apache POI.
-        //fileService.initialize();
+        fileService.initialize();
         terminalService.start();
     }
 }

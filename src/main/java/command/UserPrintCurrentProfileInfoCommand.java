@@ -1,23 +1,24 @@
 package command;
 
+import entity.Session;
 import entity.User;
 import service.UserService;
 
 @RequiresAuth
 public class UserPrintCurrentProfileInfoCommand implements Command{
     private final UserService userService;
-    User currentUser;
+    Session session;
     String pattern = "print_current_profile_info";
 
-    public UserPrintCurrentProfileInfoCommand(UserService userService, User currentUser){
+    public UserPrintCurrentProfileInfoCommand(UserService userService, Session session){
         this.userService = userService;
-        this.currentUser = currentUser;
+        this.session = session;
     }
 
     @Override
     public void process() {
         System.out.println("Выбран вывод информации профиля текущего пользователя");
-        userService.printCurrentProfileInfo(currentUser);
+        userService.printCurrentProfileInfo(session);
     }
 
     @Override

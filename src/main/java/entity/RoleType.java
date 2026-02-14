@@ -1,10 +1,16 @@
 package entity;
 
 public enum RoleType {
-    USER,
-    ADMINISTRATOR;
+    USER("Обычный пользователь"),
+    ADMINISTRATOR("Администратор");
 
-    public void displayRole(){
-        System.out.println();
+    private String displayName;
+
+    RoleType(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String displayName(){
+        return displayName;
     }
 }

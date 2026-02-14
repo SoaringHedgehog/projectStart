@@ -1,5 +1,6 @@
 package command;
 
+import entity.Session;
 import entity.User;
 import service.ProjectService;
 import service.TaskService;
@@ -13,15 +14,15 @@ public class CommandRegistry {
     ProjectService projectService;
     TaskService taskService;
     UserService userService;
-    User currentUser;
+    Session session;
     HashMap<String, Command> commandMap;
 
-    public CommandRegistry(Scanner scanner, ProjectService projectService, TaskService taskService, UserService userService, User currentUser){
+    public CommandRegistry(Scanner scanner, ProjectService projectService, TaskService taskService, UserService userService, Session session){
         this.scanner = scanner;
         this.projectService = projectService;
         this.taskService = taskService;
         this.userService = userService;
-        this.currentUser = currentUser;
+        this.session = session;
         commandMap = new HashMap<>();
         init();
     }
@@ -55,15 +56,15 @@ public class CommandRegistry {
         command = new TaskUpdateByNameCommand(scanner, taskService);
         commandMap.put(command.getName(), command);
 
-        command = new UserAuthorizeCommand(scanner, userService, currentUser);
+        command = new UserAuthorizeCommand(scanner, userService, session);
         commandMap.put(command.getName(), command);
-        command = new UserPrintCurrentProfileInfoCommand(userService, currentUser);
+        command = new UserPrintCurrentProfileInfoCommand(userService, session);
         commandMap.put(command.getName(), command);
-        command = new UserRegisterCommand(scanner, userService, currentUser);
+        command = new UserRegisterCommand(scanner, userService);
         commandMap.put(command.getName(), command);
-        command = new UserTerminateSessionCommand(scanner, userService, currentUser);
+        command = new UserTerminateSessionCommand(userService, session);
         commandMap.put(command.getName(), command);
-        command = new UserUpdatePasswordCommand(scanner, userService, currentUser);
+        command = new UserUpdatePasswordCommand(scanner, userService);
         commandMap.put(command.getName(), command);
 
         command = new HelpCommand(commandMap);

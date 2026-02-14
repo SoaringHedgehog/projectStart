@@ -1,5 +1,6 @@
 package command;
 
+import entity.Session;
 import entity.User;
 import service.UserService;
 
@@ -7,21 +8,19 @@ import java.util.Scanner;
 
 @RequiresAuth
 public class UserTerminateSessionCommand implements Command{
-    private final Scanner scanner;
     private final UserService userService;
-    User currentUser;
+    Session session;
     String pattern = "terminate_current_session";
 
-    public UserTerminateSessionCommand(Scanner scanner, UserService userService, User currentUser){
-        this.scanner = scanner;
+    public UserTerminateSessionCommand(UserService userService, Session session){
         this.userService = userService;
-        this.currentUser = currentUser;
+        this.session = session;
     }
 
     @Override
     public void process() {
         System.out.println("Выбрано окончание сессии текущего пользователя");
-        userService.terminateSession(currentUser);
+        userService.terminateSession(session);
     }
 
     @Override

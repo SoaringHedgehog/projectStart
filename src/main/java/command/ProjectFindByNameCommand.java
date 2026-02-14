@@ -20,7 +20,7 @@ public class ProjectFindByNameCommand implements Command{
         System.out.println("Выбран поиск проекта по имени");
         System.out.println("Введите имя проекта");
         String projectName = scanner.nextLine();
-        projectService.findByName(projectName);
+        System.out.println(projectService.findByName(projectName));
     }
 
     @Override
